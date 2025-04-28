@@ -18,7 +18,3 @@ export const addEntry = async (content, userId) => {
 export const updateEntry = async (id, newContent) => {
   await updateDoc(doc(db, "entries", id), { content: newContent });
 };
-
-export const deleteEntry = async (id) => {
-  await deleteDoc(doc(db, "entries", id));
-};

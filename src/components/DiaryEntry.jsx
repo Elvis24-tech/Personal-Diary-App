@@ -1,6 +1,6 @@
 import { useState, memo } from 'react';
 
-const DiaryEntry = ({ entry, onUpdate }) => {  // Removed onDelete from props
+const DiaryEntry = ({ entry, onUpdate }) => { 
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(entry.content);
 
