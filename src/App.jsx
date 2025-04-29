@@ -15,7 +15,6 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Auth state listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -24,7 +23,6 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  // Load entries when user changes
   const loadEntries = useCallback(async () => {
     if (user) {
       try {
@@ -42,21 +40,19 @@ export default function App() {
     loadEntries();
   }, [loadEntries]);
 
-  // Toggle dark mode with localStorage persistence
   const toggleDarkMode = () => {
     const newMode = !darkMode;
     setDarkMode(newMode);
     localStorage.setItem('darkMode', newMode.toString());
   };
 
-  // CRUD Handlers
   const handleAddEntry = useCallback(async (content) => {
     try {
       const newEntry = await addEntry(content, user.uid);
       setEntries(prev => [newEntry, ...prev]);
     } catch (error) {
       console.error("Error adding entry:", error);
-      throw error; // Propagate error to DiaryForm
+      throw error; 
     }
   }, [user]);
 
@@ -68,7 +64,7 @@ export default function App() {
       ));
     } catch (error) {
       console.error("Error updating entry:", error);
-      throw error; // Propagate error to DiaryEntry
+      throw error;
     }
   }, []);
 
@@ -89,7 +85,6 @@ export default function App() {
     }
   };
 
-  // Rest of the component remains unchanged
   if (loading) return <div className="loading">Loading...</div>;
 
   return (
